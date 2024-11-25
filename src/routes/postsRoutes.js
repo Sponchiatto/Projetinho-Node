@@ -6,6 +6,12 @@ import {
   postarNovoPost,
   uploadImagem,
 } from "../controllers/postsControllers.js";
+import cors from "cors";
+
+const corsOptions = {
+  origin: "http://localhost:8000",
+  optionsSuccessStatus: 200,
+};
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -20,7 +26,7 @@ const upload = multer({ dest: "./uploads", storage });
 const routes = (app) => {
   // Permite que o Express entenda requisições com formato JSON.
   app.use(express.json());
-
+  app.use(cors(corsOptions));
   // Rota GET para a URL '/posts'. Quando essa rota é acessada, a função getTodosPosts é chamada
   // e os posts obtidos são enviados como resposta em formato JSON.
   app.get("/posts", listarPosts);
