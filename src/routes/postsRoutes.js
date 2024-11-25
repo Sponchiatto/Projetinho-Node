@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import {
+  atualizaNovoPost,
   listarPosts,
   postarNovoPost,
   uploadImagem,
@@ -27,6 +28,8 @@ const routes = (app) => {
   // Rota para criar um post
   app.post("/posts", postarNovoPost);
   app.post("/upload", upload.single("imagem"), uploadImagem);
+
+  app.put("/upload/:id", atualizaNovoPost);
 };
 
 export default routes;
